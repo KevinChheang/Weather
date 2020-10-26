@@ -1,7 +1,7 @@
 from flask import Flask, request, flash, render_template, redirect
 from flask_debugtoolbar import DebugToolbarExtension
 
-from models import db, connect_db
+from models import db, connect_db, User, Upcoming_trip, Search
 
 from secrets import secret_key
 
@@ -16,3 +16,8 @@ app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
 debug = DebugToolbarExtension(app)
 
 connect_db(app)
+
+
+# Drop then create table
+db.drop_all()
+db.create_all()
