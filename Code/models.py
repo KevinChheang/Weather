@@ -1,4 +1,4 @@
-from flask_sqlalchemy import flask_sqlalchemy
+from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
@@ -22,7 +22,7 @@ class User(db.Model):
 class Upcoming_trip(db.Model):
     """upcoming_trips table"""
 
-    __tablename__ = "users"
+    __tablename__ = "upcomint_trips"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     city = db.Column(db.String(40), nullable=False)
@@ -41,4 +41,3 @@ class Search(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
 
     user = db.relationship("User")
-
