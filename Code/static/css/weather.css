@@ -1,0 +1,12 @@
+#content-wrapper {
+    background-color: lightgray;
+}
+
+#nav-brand {
+    font-size: 1.8rem;
+    color: rgb(230, 226, 29);
+}
+
+#search-box {
+    width: 350px;
+}

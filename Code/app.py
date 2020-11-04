@@ -3,11 +3,13 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from models import db, connect_db, User, Upcoming_trip, Search
 
-from secrets import session_key
+from secrets import SESSION_KEY
+# from os import environ
+# environ.get('SECRET_KEY')
 
 app = Flask(__name__)
 
-app.config["SECRET_KEY"] = session_key
+app.config["SECRET_KEY"] = SESSION_KEY
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///weather'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
@@ -24,3 +26,4 @@ db.create_all()
 @app.route("/")
 def homepage():
     return render_template("index.html")
+
