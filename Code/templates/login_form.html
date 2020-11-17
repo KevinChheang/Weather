@@ -3,23 +3,22 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<h1 class="text-center">Login</h1>
-<div class="mx-5">
-    <form method="POST">
-        {{ form.hidden_tag() }}
+    <h1 class="text-center">Login</h1>
+    <div class="mx-5">
+        <form method="POST">
+            {{ form.hidden_tag() }}
 
-        {% for field in form
-        if field.widget.input_type != 'hidden' %}
-        <div class="form-group">
-            {{ field.label }}
-            {{ field(class_="form-control") }}
-            {% for error in field.errors %}
-                <p class="text-danger">{{ error }}</p>
+            {% for field in form
+            if field.widget.input_type != 'hidden' %}
+            <div class="form-group">
+                {{ field.label }}
+                {{ field(class_="form-control") }}
+                {% for error in field.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
             {% endfor %}
-        </div>
-        {% endfor %}
-        <button class="btn btn-primary mb-2">Login</button>
-    </form>
-</div>
-
+            <button class="btn btn-primary mb-2">Login</button>
+        </form>
+    </div>
 {% endblock %}

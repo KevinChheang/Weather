@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Trip Details{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1 class="text-center">Trip Details</h1>
+
+        <div class="">
+            <div class="">
+                <h3 class="">City: <span id="city">{{trip.city}}</span></h3>
+            </div>
+            <div class="">
+                <h3 class="">Country: <span id="country">{{trip.country}}</span></h3>
+            </div>
+            <div class="">
+                <h3 class="">Date: <span id="date">{{trip.date}}</span></h3>
+            </div>
+            <button id="recommendation-btn" class="btn btn-primary mb-2">Recommendation</button>
+        </div>
+
+        <div id="recommendation">
+
+        </div>
+    </div>
+{% endblock %}

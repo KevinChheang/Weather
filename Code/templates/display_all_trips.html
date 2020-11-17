@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Trips{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1 class="text-center">Upcoming Trips</h1>
+
+        <div class="row text-center">
+            <div class="col-4">
+                <h3 class="">City</h3>
+            </div>
+            <div class="col-4">
+                <h3 class="">Country</h3>
+            </div>
+            <div class="col-4">
+                <h3>Date</h3>
+            </div>
+        </div>
+
+        {% for trip in trips %}
+            <div class="row text-center">
+                <div class="col-4 list-group">
+                    <h4 class="font-weight-normal list-group-item"><a href="/trip_details/{{trip.id}}">{{trip.city}}</a></h4>
+                </div>
+                <div class="col-4 list-group">
+                    <h4 class="font-weight-normal list-group-item">{{trip.country}}</h4>
+                </div>
+                <div class="col-4 list-group">
+                    <h4 class="font-weight-normal list-group-item">{{trip.date}}</h4>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

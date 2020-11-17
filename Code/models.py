@@ -21,6 +21,8 @@ class User(db.Model):
     username = db.Column(db.String(40), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
 
+    trip = db.relationship("UpcomingTrip", cascade="all, delete")
+
     @classmethod
     def signup(cls, first_name, last_name, email, username, password):
         """Register user w/hashed password & return user."""
@@ -44,17 +46,25 @@ class User(db.Model):
         else:
             return False
 
-class Upcoming_trip(db.Model):
+class UpcomingTrip(db.Model):
     """upcoming_trips table"""
 
-    __tablename__ = "upcomint_trips"
+    __tablename__ = "upcoming_trips"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    country = db.Column(db.String(2))
     city = db.Column(db.String(40), nullable=False)
-    date = db.Column(db.DateTime, nullable=False)
+    date = db.Column(db.Date, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
 
     user = db.relationship("User")
+
+    def serialize_trip(self):
+
+        return {
+            "country": self.country,
+            "city": self.city
+        }
 
 class Search(db.Model):
     """searches table"""
