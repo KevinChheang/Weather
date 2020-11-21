@@ -1,6 +1,6 @@
 key.txt
 venv
-secrets.py
+secrets.*
 __pycache__
 *.pyc
 .env
