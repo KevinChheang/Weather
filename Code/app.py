@@ -22,11 +22,6 @@ debug = DebugToolbarExtension(app)
 
 connect_db(app)
 
-# Drop then create table
-# db.drop_all()
-# db.create_all()
-
-
 # use this to hide/show search box and submit button
 def setSession():
     session["hide"] = True
@@ -145,7 +140,7 @@ def show_all_trips(user_id):
 @app.route("/trip_details/<int:trip_id>")
 def show_trip_details(trip_id):
     setSession()
-    
+
     # check if user login or not
     if "user_id" not in session:
         flash("Please login to gain access.", "info")
