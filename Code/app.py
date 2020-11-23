@@ -26,10 +26,15 @@ connect_db(app)
 # db.drop_all()
 # db.create_all()
 
+
+# use this to hide/show search box and submit button
+def setSession():
+    session["hide"] = True
+
 @app.route("/")
 def homepage():
-    # if "user_id" not in session:
-    #     flash("Signup/Login to unlock full features.", "info")
+    # remove session to show search box and submit button
+    session.pop("hide")
 
     return render_template("index.html")
 
@@ -38,6 +43,7 @@ def logout():
     """Logout user, clear session"""
     session.pop("user_id")
     session.pop("username")
+    session.pop("hide")
 
     flash("Logout sucessful", "success")
 
@@ -46,6 +52,8 @@ def logout():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    setSession()
+
     """Login user, check if login credentials are correct"""
     form = UserLoginForm()
 
@@ -69,6 +77,8 @@ def login():
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
+    setSession()
+
     """Signup user, hased password and save user info to db"""
     form = UserSignupForm()
 
@@ -98,6 +108,8 @@ def signup():
 
 @app.route("/add-trip/<int:user_id>", methods=["GET", "POST"])
 def add_trip(user_id):
+    setSession()
+
     """Adding upcoming trip and save to db"""
     form = UpcomingTripForm()
 
@@ -118,6 +130,8 @@ def add_trip(user_id):
 
 @app.route("/all_trips/<int:user_id>")
 def show_all_trips(user_id):
+    setSession()
+
     # check if user login or not
     if "user_id" not in session:
         flash("Please login to gain access.", "info")
@@ -130,6 +144,8 @@ def show_all_trips(user_id):
 
 @app.route("/trip_details/<int:trip_id>")
 def show_trip_details(trip_id):
+    setSession()
+    
     # check if user login or not
     if "user_id" not in session:
         flash("Please login to gain access.", "info")
@@ -139,18 +155,3 @@ def show_trip_details(trip_id):
     trip = UpcomingTrip.query.get_or_404(trip_id)
 
     return render_template("display_trip_details.html", trip=trip)
-
-# RESTful API route to get data from db
-# will be call from js file
-# @app.route("/trips")
-# def get_all_trips():
-#     # check if user login or not
-#     if "user_id" not in session:
-#         flash("Please login to gain access.", "info")
-
-#         return redirect("/")
-
-#     trips = UpcomingTrip.query.all()
-#     serialized = [trip.serialize_trip() for trip in trips]
-
-#     return jsonify(serialized)

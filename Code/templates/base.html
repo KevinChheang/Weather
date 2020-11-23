@@ -19,10 +19,12 @@
             </button>
             
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form id="search-form" class="form-inline my-2 my-lg-0">
-                    <input id="search-box" class="form-control mr-sm-2" type="search" placeholder="City" name="search" aria-label="Search">
-                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-                </form>
+                {% if not session["hide"] %}
+                    <form id="search-form" class="form-inline my-2 my-lg-0">
+                        <input id="search-box" class="form-control mr-sm-2" type="search" placeholder="City" name="search" aria-label="Search">
+                        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                {% endif %}
                 <ul class="navbar-nav ml-auto">
                 {% if session["user_id"] %}
                     <h4 class="mr-2 pt-2 text-light">{{session["username"]}}</h4>

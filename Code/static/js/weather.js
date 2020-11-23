@@ -180,7 +180,7 @@ async function getPointOfInterest() {
                             <p class="col-md-6"><b>Street:</b> ${respPlaceDetails.data.address.road}</p>
                         </div>
 
-                        <div class="row">
+                        <div class="row text-wrap">
                             <p class="col-md-6"><b>Name:</b> ${respId.data.features[randomNum].properties.name}</p>
                             <p class="col-md-6"><b>Kinds:</b> ${respId.data.features[randomNum].properties.kinds}</p>
                         </div>
@@ -190,7 +190,7 @@ async function getPointOfInterest() {
                         </div>
 
                         <div class="row">
-                            <img class="col-md-8" src="${respPlaceDetails.data.preview.source ? respPlaceDetails.data.preview.source : "https://via.placeholder.com/250"}"/>
+                            <img class="col-md-8" src="${respPlaceDetails.data.preview.source ? respPlaceDetails.data.preview.source : "https://via.placeholder.com/250"}/>
                         </div>
                         
                         <div class="row">
@@ -237,6 +237,10 @@ function createDailyForecastHTML(forecast) {
         `;
 
     return html;
+}
+
+function hideElements() {
+    
 }
 
 // convert from metric meter to imperial mile
