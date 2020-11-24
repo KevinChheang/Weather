@@ -111,7 +111,7 @@ def add_trip(user_id):
     if form.validate_on_submit():
         country = form.country.data
         city = form.city.data
-        date = form.date.data
+        date = form.date.data.strftime("%m/%d/%Y")
 
         trip = UpcomingTrip(country=country, city=city, date=date, user_id=user_id)
         db.session.add(trip)

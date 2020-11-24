@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, DateField, SelectField
+from wtforms import StringField, PasswordField, SelectField
+from wtforms.fields.html5 import DateField
 from wtforms.validators import InputRequired, Email
 
 # Country names object using 2-letter country codes to reference country name
@@ -264,7 +265,7 @@ class UserSignupForm(FlaskForm):
 
     last_name = StringField("Last name", validators=[InputRequired()])
 
-    email = StringField("Email", validators=[])
+    email = StringField("Email", validators=[InputRequired(), Email()])
 
     username = StringField("Username", validators=[InputRequired()])
 
@@ -285,4 +286,4 @@ class UpcomingTripForm(FlaskForm):
 
     city = StringField("City", validators=[InputRequired()])
 
-    date = DateField("Date", format="%m/%d/%Y")
+    date = DateField("Date", format="%m/%d/%Y", render_kw={"placeholder": "MM/DD/YYYY"})
