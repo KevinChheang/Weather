@@ -142,6 +142,7 @@ async function processForm(evt) {
 
 $("#search-form").on("submit", processForm);
 
+// Fetching data from API then display it
 async function getPointOfInterest() {
     let $city = $("#city").text();
     let $countryCode = $("#country").text();
@@ -167,22 +168,20 @@ async function getPointOfInterest() {
     let respPlaceDetails = await axios.get(`https://api.opentripmap.com/0.1/en/places/xid/${id}?apikey=${LOCATION_API_KEY}`);
 
     let contentHTML = `
-                        <h3 class="text-center">Location Details</h3>
+                        <h2 class="text-center">${respId.data.features[randomNum].properties.name}</h2>
                         <div class="row">
                             <p class="col-md-6"><b>Timezone:</b> ${respCoords.data.timezone}</p>
                             <p class="col-md-6"><b>Population:</b> ${respCoords.data.population}</p>
                         </div>
                         
                         <div class="row">
-                            <p class="col-md-6"><b>Address:</b> ${respPlaceDetails.data.address.address29}</p>
+                            <p class="col-md-6"><b>State:</b> ${respPlaceDetails.data.address.state}</p>
                             <p class="col-md-6"><b>Neighborhood:</b> ${respPlaceDetails.data.address.neighbourhood}</p>
-                            <p class="col-md-6"><b>County:</b> ${respPlaceDetails.data.address.county}</p>
-                            <p class="col-md-6"><b>Street:</b> ${respPlaceDetails.data.address.road}</p>
                         </div>
 
-                        <div class="row text-wrap">
-                            <p class="col-md-6"><b>Name:</b> ${respId.data.features[randomNum].properties.name}</p>
-                            <p class="col-md-6"><b>Kinds:</b> ${respId.data.features[randomNum].properties.kinds}</p>
+                        <div class="row">
+                            <p class="col-md-6"><b>County:</b> ${respPlaceDetails.data.address.county}</p>
+                            <p class="col-md-6"><b>Street:</b> ${respPlaceDetails.data.address.road}</p>
                         </div>
 
                         <div class="row">
@@ -190,7 +189,7 @@ async function getPointOfInterest() {
                         </div>
 
                         <div class="row">
-                            <img class="col-md-8" src="${respPlaceDetails.data.preview.source ? respPlaceDetails.data.preview.source : "https://via.placeholder.com/250"}/>
+                            <img class="col-md-12" src="${respPlaceDetails.data.preview.source ? `(${respPlaceDetails.data.preview.source})` : 'https://via.placeholder.com/250'}"/>
                         </div>
                         
                         <div class="row">
@@ -213,24 +212,24 @@ function createDailyForecastHTML(forecast) {
     console.log("Daily forecast for loop", forecast);
     let html = `
             <div class="row" style="background-color: white;">
-                <div class="col-md-1">
-                    <p class="daily-forecast">${secondsToDate(forecast.dt)}</p>
+                <div class="daily-forecast col-md-2">
+                    <p class="">${secondsToDate(forecast.dt)}</p>
                 </div>
 
-                <div class="col-md-2">
-                    <img class="daily-forecast" src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt="weather icon"/>
+                <div class="daily-forecast col-md-2">
+                    <img class="" src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt="weather icon"/>
                 </div>
 
-                <div class="col-md-3">
-                    <p class="daily-forecast "><span class="daily-max">${Math.round(forecast.temp.max)} ºF</span>/<span class="daily-min">${Math.round(forecast.temp.min)} ºF</span></p>
+                <div class="daily-forecast col-md-2">
+                    <p class=""><span class="daily-max">${Math.round(forecast.temp.max)} ºF</span>/<span class="daily-min">${Math.round(forecast.temp.min)} ºF</span></p>
                 </div>
 
-                <div class="col-md-3">
-                    <p class="daily-forecast">Sunrise: ${secondsToTime(forecast.sunrise)}</p>
+                <div class="daily-forecast col-md-3">
+                    <p class="">Sunrise: ${secondsToTime(forecast.sunrise)}</p>
                 </div>
 
-                <div class="col-md-3">
-                    <p class="daily-forecast">Sunset: ${secondsToTime(forecast.sunset)}</p>
+                <div class="daily-forecast col-md-3">
+                    <p class="">Sunset: ${secondsToTime(forecast.sunset)}</p>
                 </div>
             </div>
             <br/>

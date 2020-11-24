@@ -7,13 +7,13 @@ from forms import UserSignupForm, UserLoginForm, UpcomingTripForm
 from sqlalchemy.exc import IntegrityError
 
 from secrets import SESSION_KEY
-# from os import environ
-# environ.get('SECRET_KEY')
+
+import os
 
 app = Flask(__name__)
 
-app.config["SECRET_KEY"] = SESSION_KEY
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///weather'
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "SESSION_KEY")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL" ,'postgresql:///weather')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
@@ -29,7 +29,7 @@ def setSession():
 @app.route("/")
 def homepage():
     # remove session to show search box and submit button
-    session.pop("hide")
+    session["hide"] = False
 
     return render_template("index.html")
 
