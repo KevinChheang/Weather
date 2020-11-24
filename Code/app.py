@@ -105,6 +105,12 @@ def signup():
 def add_trip(user_id):
     setSession()
 
+    # check if user login or not
+    if "user_id" not in session:
+        flash("Please login to gain access.", "info")
+
+        return redirect("/")
+
     """Adding upcoming trip and save to db"""
     form = UpcomingTripForm()
 
