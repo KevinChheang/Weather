@@ -33,3 +33,8 @@ h1, h2 {
     height: 100%;
     text-align: center;
 }
+
+#attraction-details {
+    background-color: rgb(20, 235, 224);
+    padding: 15px;
+}

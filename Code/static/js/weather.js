@@ -168,32 +168,30 @@ async function getPointOfInterest() {
     let respPlaceDetails = await axios.get(`https://api.opentripmap.com/0.1/en/places/xid/${id}?apikey=${LOCATION_API_KEY}`);
 
     let contentHTML = `
-                        <h2 class="text-center">${respId.data.features[randomNum].properties.name}</h2>
-                        <div class="row">
-                            <p class="col-md-6"><b>Timezone:</b> ${respCoords.data.timezone}</p>
-                            <p class="col-md-6"><b>Population:</b> ${respCoords.data.population}</p>
-                        </div>
-                        
-                        <div class="row">
-                            <p class="col-md-6"><b>State:</b> ${respPlaceDetails.data.address.state}</p>
-                            <p class="col-md-6"><b>Neighborhood:</b> ${respPlaceDetails.data.address.neighbourhood}</p>
-                        </div>
+                        <div id="attraction-details">
+                            <h2 class="text-center">${respId.data.features[randomNum].properties.name ? respId.data.features[randomNum].properties.name : "Location's name not available"}</h2>
+                            <div class="row">
+                                <p class="col-md-6"><b>Timezone:</b> ${respCoords.data.timezone}</p>
+                                <p class="col-md-6"><b>Population:</b> ${respCoords.data.population}</p>
+                            </div>
+                            
+                            <div class="row">
+                                <p class="col-md-6"><b>State:</b> ${respPlaceDetails.data.address.state ? respPlaceDetails.data.address.state : "N/A"}</p>
+                                <p class="col-md-6"><b>Neighborhood:</b> ${respPlaceDetails.data.address ? respPlaceDetails.data.address.neighbourhood : "N/A"}</p>
+                            </div>
 
-                        <div class="row">
-                            <p class="col-md-6"><b>County:</b> ${respPlaceDetails.data.address.county}</p>
-                            <p class="col-md-6"><b>Street:</b> ${respPlaceDetails.data.address.road}</p>
-                        </div>
+                            <div class="row">
+                                <p class="col-md-6"><b>County:</b> ${respPlaceDetails.data.address.county ? respPlaceDetails.data.address.county : "N/A"}</p>
+                                <p class="col-md-6"><b>Street:</b> ${respPlaceDetails.data.address.road ? respPlaceDetails.data.address.road : "N/A"}</p>
+                            </div>
 
-                        <div class="row">
-                            <p class="col-md-12"><b>Description:</b></p>
-                        </div>
-
-                        <div class="row">
-                            <img class="col-md-12" src="${respPlaceDetails.data.preview.source ? `(${respPlaceDetails.data.preview.source})` : 'https://via.placeholder.com/250'}"/>
-                        </div>
-                        
-                        <div class="row">
-                            <p class="col-md-12">${respPlaceDetails.data.wikipedia_extracts.text ? respPlaceDetails.data.wikipedia_extracts.text : "N/A"}</p>
+                            <div class="row">
+                                <img class="col-md-12" src="${respPlaceDetails.data.preview ? respPlaceDetails.data.preview.source : 'https://via.placeholder.com/500x300?text=No+image+available'}"/>
+                            </div>
+                            
+                            <div class="row">
+                                <p class="col-md-12">${respPlaceDetails.data.wikipedia_extracts ? respPlaceDetails.data.wikipedia_extracts.text : "No description avaialble."}</p>
+                            </div>
                         </div>
                     `;
 
