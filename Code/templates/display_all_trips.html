@@ -21,11 +21,17 @@
                 <div class="col-4 list-group">
                     <h4 class="font-weight-normal list-group-item"><a href="/trip_details/{{trip.id}}">{{trip.city}}</a></h4>
                 </div>
-                <div class="col-4 list-group">
+
+                <div class="col-3 list-group">
                     <h4 class="font-weight-normal list-group-item">{{trip.country}}</h4>
                 </div>
+
                 <div class="col-4 list-group">
                     <h4 class="font-weight-normal list-group-item">{{trip.date}}</h4>
+                </div>
+
+                <div id="trash-bin" class="col-1">
+                    <a id="delete-trip" href="/delete-trip/{{trip.id}}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                 </div>
             </div>
         {% endfor %}

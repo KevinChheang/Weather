@@ -38,3 +38,12 @@ h1, h2 {
     background-color: rgb(20, 235, 224);
     padding: 15px;
 }
+
+#trash-bin {
+    margin-top: 10px;
+    height: 40px;
+}
+
+#delete-trip {
+    color: red;
+}

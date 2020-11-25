@@ -1,4 +1,4 @@
-from flask import Flask, request, flash, render_template, redirect, session, jsonify
+from flask import Flask, request, flash, render_template, redirect, session, jsonify, url_for
 from flask_debugtoolbar import DebugToolbarExtension
 
 from models import db, connect_db, User, UpcomingTrip, Search
@@ -128,6 +128,24 @@ def add_trip(user_id):
         return redirect("/")
 
     return render_template("add_trip_form.html", form=form)
+
+@app.route("/delete-trip/<int:trip_id>")
+def delete_trip(trip_id):
+    # check if user login or not
+    if "user_id" not in session:
+        flash("Please login to gain access.", "info")
+
+        return redirect("/")
+
+    trip = UpcomingTrip.query.get_or_404(trip_id)
+
+    UpcomingTrip.query.filter_by(id=trip_id).delete()
+
+    flash(f"{trip.city} deleted.", "success")
+
+    db.session.commit()
+
+    return redirect(f"/all_trips/{trip.user_id}")
 
 @app.route("/all_trips/<int:user_id>")
 def show_all_trips(user_id):
