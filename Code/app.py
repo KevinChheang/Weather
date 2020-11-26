@@ -129,6 +129,28 @@ def add_trip(user_id):
 
     return render_template("add_trip_form.html", form=form)
 
+@app.route("/edit-trip/<int:trip_id>", methods=["GET", "POST"])
+def edit_trip(trip_id):
+    setSession()
+    trip = UpcomingTrip.query.get_or_404(trip_id)
+
+    form = UpcomingTripForm(obj=trip)
+
+    if form.validate_on_submit():
+        trip.country = form.country.data
+        trip.city = form.city.data
+        trip.date = form.date.data.strftime("%m/%d/%Y")
+
+        db.session.add(trip)
+        db.session.commit()
+
+        flash("Trip updated", "success")
+
+        return redirect(f"/all_trips/{trip.user_id}")
+
+    return render_template("add_trip_form.html", form=form)
+    
+
 @app.route("/delete-trip/<int:trip_id>")
 def delete_trip(trip_id):
     # check if user login or not

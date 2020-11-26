@@ -5,33 +5,43 @@
         <h1 class="text-center">Upcoming Trips</h1>
 
         <div class="row text-center">
-            <div class="col-4">
+            <div class="col-md-4">
                 <h3 class="">City</h3>
             </div>
-            <div class="col-4">
+            <div class="col-md-4">
                 <h3 class="">Country</h3>
             </div>
-            <div class="col-4">
+            <div class="col-md-4">
                 <h3>Date</h3>
             </div>
         </div>
 
         {% for trip in trips %}
             <div class="row text-center">
-                <div class="col-4 list-group">
-                    <h4 class="font-weight-normal list-group-item"><a href="/trip_details/{{trip.id}}">{{trip.city}}</a></h4>
+                <!-- <div class="col-md-1">
                 </div>
 
-                <div class="col-3 list-group">
+                <div class="col-md-1">
+                </div> -->
+                
+                <div class="col-md-5 list-group">
+                    <h4 class="font-weight-normal list-group-item">
+                        <a href="/trip_details/{{trip.id}}">
+                        {{trip.city}}
+                        </a>
+
+                        <a class="trip-link float-right trash-icon ml-3" href="/delete-trip/{{trip.id}}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+
+                        <a class="trip-link float-right edit-icon" href="/edit-trip/{{trip.id}}"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                    </h4>
+                </div>
+
+                <div class="col-md-2 list-group">
                     <h4 class="font-weight-normal list-group-item">{{trip.country}}</h4>
                 </div>
 
-                <div class="col-4 list-group">
+                <div class="col-md-5 list-group">
                     <h4 class="font-weight-normal list-group-item">{{trip.date}}</h4>
-                </div>
-
-                <div id="trash-bin" class="col-1">
-                    <a id="delete-trip" href="/delete-trip/{{trip.id}}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                 </div>
             </div>
         {% endfor %}

@@ -39,11 +39,6 @@ h1, h2 {
     padding: 15px;
 }
 
-#trash-bin {
-    margin-top: 10px;
-    height: 40px;
-}
-
-#delete-trip {
+.trip-link {
     color: red;
 }
