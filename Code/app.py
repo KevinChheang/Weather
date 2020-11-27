@@ -105,6 +105,9 @@ def signup():
 def add_trip(user_id):
     setSession()
 
+    # use this to switch between add/edit trip
+    session["edit"] = False
+
     # check if user login or not
     if "user_id" not in session:
         flash("Please login to gain access.", "info")
@@ -132,6 +135,10 @@ def add_trip(user_id):
 @app.route("/edit-trip/<int:trip_id>", methods=["GET", "POST"])
 def edit_trip(trip_id):
     setSession()
+
+    # use this to switch between add/edit trip
+    session["edit"] = True
+
     trip = UpcomingTrip.query.get_or_404(trip_id)
 
     form = UpcomingTripForm(obj=trip)

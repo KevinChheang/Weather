@@ -3,7 +3,11 @@
 {% block title %}Add Trip{% endblock %}
 
 {% block content %}
-<h1 class="text-center">New Trip</h1>
+{% if session["edit"] == True %}
+    <h1 class="text-center">Edit Trip</h1>
+{% else %}
+    <h1 class="text-center">New Trip</h1>
+{% endif %}
 <div class="mx-5">
     <form method="POST">
         {{ form.hidden_tag() }}
@@ -18,7 +22,12 @@
             {% endfor %}
         </div>
         {% endfor %}
-        <button class="btn btn-primary mb-2">Save</button>
+
+        {% if session["edit"] == True %}
+            <button class="btn btn-primary mb-2">Update</button>
+        {% else %}
+            <button class="btn btn-primary mb-2">Save</button>
+        {% endif %} 
     </form>
 </div>
 
