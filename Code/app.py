@@ -103,16 +103,16 @@ def signup():
 
 @app.route("/add-trip/<int:user_id>", methods=["GET", "POST"])
 def add_trip(user_id):
-    setSession()
-
-    # use this to switch between add/edit trip
-    session["edit"] = False
-
     # check if user login or not
     if "user_id" not in session:
         flash("Please login to gain access.", "info")
 
         return redirect("/")
+    
+    setSession()
+
+    # use this to switch between add/edit trip
+    session["edit"] = False
 
     """Adding upcoming trip and save to db"""
     form = UpcomingTripForm()
@@ -128,12 +128,18 @@ def add_trip(user_id):
 
         flash("Trip saved", "success")
 
-        return redirect("/")
+        return redirect(f"/all_trips/{trip.user_id}")
 
     return render_template("add_trip_form.html", form=form)
 
 @app.route("/edit-trip/<int:trip_id>", methods=["GET", "POST"])
 def edit_trip(trip_id):
+    # check if user login or not
+    if "user_id" not in session:
+        flash("Please login to gain access.", "info")
+
+        return redirect("/")
+
     setSession()
 
     # use this to switch between add/edit trip
